@@ -479,9 +479,9 @@ ul.filter li.active a {
 }
 
 .portfolio-area .image-wrapp img,
-.portfolio-home .image-wrapp img{
-	margin:0;
-	padding:0;
+.portfolio-home .image-wrapp img {
+	margin: 0;
+	padding: 0;
 }
 
 .portfolio-area .thumbnail .caption,

@@ -1,9 +1,76 @@
 ﻿@using ProjectCluster.Common
+@model ProjectCluster.Web.ViewModels.Home.IndexViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section id="intro">
+
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h2><strong>Bootstrap <span class="highlight primary">business theme</span></strong></h2>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, qui corpora oportere cu. Usu et iudico maluisset, pro ut lobortis vituperatoribus, percipit aliquando efficiendi est ex.
+                </p>
+                <ul class="list list-ok strong bigger">
+                    <li>100% Compatible with twitter bootstrap</li>
+                    <li>Valid HTML5 code and well structured</li>
+                    <li>Really updatable and easy to customize</li>
+                </ul>
+
+            </div>
+            <div class="span6">
+
+                <div class="group section-wrap upper" id="upper">
+                    <div class="section-2 group">
+                        <ul id="images" class="rs-slider">
+                            <li class="group">
+                                <a href="#">
+                                    <img src="~/img/slides/refine/slide1.png" alt="" />
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="#" class="slide-parent">
+                                    <img src="~/img/slides/refine/slide2.png" alt="" />
+                                </a>
+                            </li>
+                            <li class="group">
+                                <a href="#" class="slide-parent">
+                                    <img src="~/img/slides/refine/slide3.png" alt="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.section-2 -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row">
+    <ul class="portfolio-area da-thumbs">
+        @foreach (var category in Model.Categories)
+        {
+            <li class="portfolio-item" data-id="id-0" data-type="web">
+                <div class="span3">
+                    <div class="thumbnail">
+                        <div class="image-wrapp">
+                            <img src=@category.ImageUrl alt=@category.Name title=""/>
+                            <article class="da-animate da-slideFromRight">
+                                <a href=@category.CategoryUrl>
+                                    <i class="icon-bg-light icon-link icon-circled icon-2x"></i>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="desc">
+                            <h5><i class="icon-file"></i> <strong>@category.Name</strong></h5>
+                            <p>@category.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
 </div>
