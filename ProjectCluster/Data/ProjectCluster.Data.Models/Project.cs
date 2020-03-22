@@ -5,6 +5,7 @@
     using System.Text;
 
     using ProjectCluster.Data.Common.Models;
+    using ProjectCluster.Data.Models.Enums;
 
     public class Project : BaseDeletableModel<int>
     {
@@ -16,6 +17,8 @@
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public ProjectStatus ProjectStatus { get; set; }
 
         public double Progress { get; set; }
 

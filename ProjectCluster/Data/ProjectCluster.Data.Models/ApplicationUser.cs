@@ -4,9 +4,8 @@ namespace ProjectCluster.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using ProjectCluster.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using ProjectCluster.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
