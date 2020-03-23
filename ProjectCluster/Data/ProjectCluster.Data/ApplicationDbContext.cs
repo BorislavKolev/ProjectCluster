@@ -6,11 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using ProjectCluster.Data.Common.Models;
-    using ProjectCluster.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using ProjectCluster.Data.Common.Models;
+    using ProjectCluster.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -31,8 +30,6 @@
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
-
-
 
         public override int SaveChanges() => this.SaveChanges(true);
 

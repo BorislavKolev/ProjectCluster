@@ -1,8 +1,8 @@
-﻿using ProjectCluster.Data.Models;
-using ProjectCluster.Services.Mapping;
-
-namespace ProjectCluster.Web.ViewModels.Home
+﻿namespace ProjectCluster.Web.ViewModels.Home
 {
+    using ProjectCluster.Data.Models;
+    using ProjectCluster.Services.Mapping;
+
     public class IndexCategoryViewModel : IMapFrom<Category>
     {
         public string Name { get; set; }

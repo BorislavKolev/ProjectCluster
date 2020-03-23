@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ProjectCluster.Data.Migrations
+﻿namespace ProjectCluster.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddInitialModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +20,7 @@ namespace ProjectCluster.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true)
+                    ImageUrl = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -41,7 +42,7 @@ namespace ProjectCluster.Data.Migrations
                     Progress = table.Column<double>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -74,7 +75,7 @@ namespace ProjectCluster.Data.Migrations
                     ProjectId = table.Column<int>(nullable: false),
                     Content = table.Column<string>(nullable: true),
                     Likes = table.Column<int>(nullable: false),
-                    Dislikes = table.Column<int>(nullable: false)
+                    Dislikes = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

@@ -3,9 +3,8 @@ namespace ProjectCluster.Data.Models
 {
     using System;
 
-    using ProjectCluster.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using ProjectCluster.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

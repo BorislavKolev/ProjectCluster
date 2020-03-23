@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ProjectCluster.Data.Migrations
+﻿namespace ProjectCluster.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddProjectStatusEnum : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
