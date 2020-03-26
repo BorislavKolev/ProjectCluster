@@ -18,6 +18,7 @@
                 return;
             }
 
+            // TO DO: Seed category descriptions
             var categories = new List<(string Name, string ImageUrl)>
             {
                 ("Programming", "https://res.cloudinary.com/sharwinchester/image/upload/c_fill,h_370,w_590/v1584958936/Categories/programming_lod35x.jpg"),

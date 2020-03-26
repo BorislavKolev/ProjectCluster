@@ -1,8 +1,8 @@
 ﻿namespace ProjectCluster.Data.Configurations
 {
-    using ProjectCluster.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using ProjectCluster.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

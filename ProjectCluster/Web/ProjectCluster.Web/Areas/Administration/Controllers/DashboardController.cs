@@ -1,9 +1,8 @@
 ﻿namespace ProjectCluster.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using ProjectCluster.Services.Data;
     using ProjectCluster.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

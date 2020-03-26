@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using ProjectCluster.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using ProjectCluster.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using ProjectCluster.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using ProjectCluster.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {
