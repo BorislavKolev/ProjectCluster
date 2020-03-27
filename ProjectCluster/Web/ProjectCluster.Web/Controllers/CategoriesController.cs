@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using ProjectCluster.Services.Data;
+    using ProjectCluster.Web.ViewModels.Categories;
 
     public class CategoriesController : Controller
     {
@@ -19,7 +20,7 @@
 
         public IActionResult ByName(string name)
         {
-            var viewModel = this.categoriesService.GetByName<>(name);
+            var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
 
             return this.View(viewModel);
         }

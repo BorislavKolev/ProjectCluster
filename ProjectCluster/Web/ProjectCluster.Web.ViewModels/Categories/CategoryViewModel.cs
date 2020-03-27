@@ -1,12 +1,13 @@
-﻿using ProjectCluster.Data.Models;
-using ProjectCluster.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjectCluster.Web.ViewModels.Categories
+﻿namespace ProjectCluster.Web.ViewModels.Categories
 {
-    class CategoryViewModel : IMapFrom<Category>
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using ProjectCluster.Data.Models;
+    using ProjectCluster.Services.Mapping;
+
+    public class CategoryViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 
