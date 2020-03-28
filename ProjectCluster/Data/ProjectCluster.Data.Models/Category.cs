@@ -19,6 +19,8 @@
 
         public string ImageUrl { get; set; }
 
+        public string IconName { get; set; }
+
         public ICollection<Project> Projects { get; set; }
     }
 }

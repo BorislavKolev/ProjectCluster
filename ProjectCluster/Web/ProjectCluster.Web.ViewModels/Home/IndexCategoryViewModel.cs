@@ -11,6 +11,8 @@
 
         public string ImageUrl { get; set; }
 
+        public string IconName { get; set; }
+
         public string CategoryUrl => $"/Categories/{this.Name.Replace(' ', '-')}";
     }
 }

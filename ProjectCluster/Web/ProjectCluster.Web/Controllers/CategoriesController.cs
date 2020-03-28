@@ -21,6 +21,9 @@
         public IActionResult ByName(string name)
         {
             var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
+            var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
+
+            viewModel.SidebarCategories = sidebarCategories;
 
             return this.View(viewModel);
         }
