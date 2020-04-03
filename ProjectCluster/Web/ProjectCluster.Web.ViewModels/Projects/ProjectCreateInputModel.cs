@@ -1,19 +1,25 @@
 ﻿namespace ProjectCluster.Web.ViewModels.Projects
 {
-    using ProjectCluster.Data.Models.Enums;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
+
+    using ProjectCluster.Data.Models.Enums;
 
     public class ProjectCreateInputModel
     {
+        [Required]
         public string Title { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int CategoryId { get; set; }
 
-        public ProjectStatus ProjectStatus { get; set; }
+        [Required]
+        public string ProjectStatus { get; set; }
 
         public double Progress { get; set; }
     }

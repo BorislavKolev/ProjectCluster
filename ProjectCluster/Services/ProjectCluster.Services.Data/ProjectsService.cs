@@ -1,9 +1,11 @@
 ﻿namespace ProjectCluster.Services.Data
 {
+    using System;
     using System.Threading.Tasks;
 
     using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
+    using ProjectCluster.Data.Models.Enums;
     using ProjectCluster.Web.ViewModels.Projects;
 
     public class ProjectsService : IProjectsService
@@ -22,7 +24,7 @@
                 CategoryId = input.CategoryId,
                 Content = input.Content,
                 Title = input.Title,
-                ProjectStatus = input.ProjectStatus,
+                ProjectStatus = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), input.ProjectStatus),
                 Progress = input.Progress,
                 UserId = userId,
             };
