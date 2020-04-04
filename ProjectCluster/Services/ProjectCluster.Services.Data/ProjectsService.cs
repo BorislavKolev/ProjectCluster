@@ -25,7 +25,7 @@
                 Content = input.Content,
                 Title = input.Title,
                 ProjectStatus = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), input.ProjectStatus),
-                Progress = input.Progress,
+                Progress = input.ProjectStatus == "Finished" ? 100 : input.Progress,
                 UserId = userId,
             };
 
