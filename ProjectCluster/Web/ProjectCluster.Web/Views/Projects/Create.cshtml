@@ -18,32 +18,47 @@
         </div>
     </div>
 </div>
- 
+
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        plugins: [
+            "image paste table link code media"
+        ]
+    });
+</script>
+
 <div class="container">
     <form method="post" class="contactForm" asp-action="Create">
-        <div class="row">
+        <div class="row">           
             <div class="span10 form-group">
-                <input asp-for="Title" type="text" class="form-control" name="title" id="title" placeholder="Title" />
+                <label>Title</label>
+                <input asp-for="Title" type="text" class="form-control" name="title" id="title" />
                 <span asp-validation-for="Title"></span>
             </div>
 
             <div class="span10 form-group">
-                <textarea asp-for="Content" class="form-control" name="content" rows="10" placeholder="Content"></textarea>
+                <label>Content</label>
+                <textarea asp-for="Content" class="form-control" name="content" rows="15"></textarea>
                 <span asp-validation-for="Content"></span>
             </div>
-
+            <hr>
             <div class="span10 form-group">
-                <input asp-for="CategoryId" type="number" name="categoryId" class="form-control" id="categoryId" placeholder="Category" />
+                <label>Category</label>
+                <select asp-for="CategoryId" asp-items="@Model.Categories.Select(x => new SelectListItem(x.Name, x.Id.ToString()))" name="categories" class="form-control" id="categoryId"></select>
                 <span asp-validation-for="CategoryId"></span>
             </div>
 
             <div class="span10 form-group">
-                <input asp-for="ProjectStatus" type="text" class="form-control" name="projectStatus" id="projectStatus" placeholder="Project Status" />
+                <label>Project Status</label>
+                <input asp-for="ProjectStatus" type="text" class="form-control" name="projectStatus" id="projectStatus" />
                 <span asp-validation-for="ProjectStatus"></span>
             </div>
 
             <div class="span10 form-group">
-                <input asp-for="Progress" type="text" class="form-control" name="progress" id="progress" placeholder="Progress" />
+                <label>Progress</label>
+                <input asp-for="Progress" type="text" class="form-control" name="progress" id="progress" />
                 <span asp-validation-for="Progress"></span>
                 <div class="text-center">
                     <button class="btn btn-color btn-rounded" type="submit">Submit</button>

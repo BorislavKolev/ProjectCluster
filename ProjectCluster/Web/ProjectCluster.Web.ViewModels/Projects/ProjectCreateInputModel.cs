@@ -3,9 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
-    using ProjectCluster.Data.Models.Enums;
 
     public class ProjectCreateInputModel
     {
@@ -22,5 +19,7 @@
         public string ProjectStatus { get; set; }
 
         public double Progress { get; set; }
+
+        public IEnumerable<CategoryDropdownViewModel> Categories { get; set; }
     }
 }

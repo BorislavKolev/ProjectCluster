@@ -12,11 +12,13 @@
     public class ProjectsController : Controller
     {
         private readonly IProjectsService projectsService;
+        private readonly ICategoriesService categoriesService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ProjectsController(IProjectsService projectsService, UserManager<ApplicationUser> userManager)
+        public ProjectsController(IProjectsService projectsService, ICategoriesService categoriesService, UserManager<ApplicationUser> userManager)
         {
             this.projectsService = projectsService;
+            this.categoriesService = categoriesService;
             this.userManager = userManager;
         }
 
@@ -28,7 +30,13 @@
         [Authorize]
         public IActionResult Create()
         {
-            return this.View();
+            var categories = this.categoriesService.GetAll<CategoryDropdownViewModel>();
+            var viewModel = new ProjectCreateInputModel
+            {
+                Categories = categories,
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
