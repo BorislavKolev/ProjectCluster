@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
+
     public class ProjectCreateInputModel
     {
         [Required]
@@ -11,6 +13,10 @@
 
         [Required]
         public string Content { get; set; }
+
+        [Required]
+        [Display(Name = "Pictures")]
+        public ICollection<IFormFile> Pictures { get; set; }
 
         [Range(1, int.MaxValue)]
         [Display(Name = "Category")]

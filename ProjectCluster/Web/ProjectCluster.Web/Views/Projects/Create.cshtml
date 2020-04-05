@@ -32,37 +32,43 @@
 
 
 <div class="container">
-    <form method="post" class="contactForm" asp-action="Create">
-        <div class="row">           
+    <form method="post"  class="contactForm" asp-action="Create" enctype="multipart/form-data">
+        <div class="row">
             <div class="span10 form-group">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" type="text" class="form-control"/>
+                <label class="control-label" asp-for="Title"></label>
+                <input asp-for="Title" type="text" class="form-control" />
                 <span asp-validation-for="Title"></span>
             </div>
 
             <div class="span10 form-group">
-                <label asp-for="Content"></label>
+                <label class="control-label" asp-for="Content"></label>
                 <textarea asp-for="Content" class="form-control" rows="15"></textarea>
                 <span asp-validation-for="Content"></span>
             </div>
-            <hr>
+
+            <div class="span10 form-group" enctype="multipart/form-data">
+                <hr />
+                <label class="control-label" asp-for="Pictures"></label>
+                <input asp-for="Pictures" type="file" name="pictures" multiple class="form-control" />
+            </div>
+
             <div class="span10 form-group">
-                <label asp-for="CategoryId"></label>
+                <label class="control-label" asp-for="CategoryId"></label>
                 <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
                 <span asp-validation-for="CategoryId"></span>
             </div>
 
             <div class="span10 form-group">
-                <label asp-for="ProjectStatus"></label>
+                <label class="control-label" asp-for="ProjectStatus"></label>
                 <select asp-for="ProjectStatus" asp-class="form-control">
                     <option value="Finished">Finished</option>
                     <option value="InProgress">In progress</option>
                 </select>
                 <span asp-validation-for="ProjectStatus"></span>
-            </div> 
+            </div>
 
             <div class="span10 form-group">
-                <label class="optional inprogress" style="display:none;" asp-for="Progress"></label>
+                <label class="control-label" class="optional inprogress" style="display:none;" asp-for="Progress"></label>
                 <input asp-for="Progress" type="number" class="optional inprogress" style="display:none;" class="hidden-txt" class="form-control">
                 <span asp-validation-for="Progress"></span>
                 <div class="text-center">

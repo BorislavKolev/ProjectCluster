@@ -12,6 +12,7 @@
         public Project()
         {
             this.Comments = new HashSet<Comment>();
+            this.ProjectPictures = new HashSet<ProjectPicture>();
         }
 
         public string Title { get; set; }
@@ -35,5 +36,7 @@
         public virtual ApplicationUser User { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<ProjectPicture> ProjectPictures { get; set; }
     }
 }
