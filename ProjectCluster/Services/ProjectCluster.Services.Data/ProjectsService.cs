@@ -2,11 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Data.Models.Enums;
+    using ProjectCluster.Services.Mapping;
     using ProjectCluster.Web.ViewModels.Projects;
 
     public class ProjectsService : IProjectsService
@@ -30,6 +32,7 @@
                 ProjectStatus = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), input.ProjectStatus),
                 Progress = input.ProjectStatus == "Finished" ? 100 : input.Progress,
                 UserId = userId,
+                ImageUrl = imageUrls.First().Insert(54, "c_fill,h_600,w_1200/"),
             };
 
             await this.projectsRepository.AddAsync(project);
@@ -48,6 +51,24 @@
             }
 
             return project.Id;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var project = this.projectsRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+            return project;
+        }
+
+        public ICollection<string> GetPictureUrls(int id)
+        {
+            var pictureUrls = this.projectPicturesRepository
+                .All()
+                .Where(x => x.ProjectId == id)
+                .Select(u => u.PictureUrl)
+                .ToList();
+
+            return pictureUrls;
         }
     }
 }

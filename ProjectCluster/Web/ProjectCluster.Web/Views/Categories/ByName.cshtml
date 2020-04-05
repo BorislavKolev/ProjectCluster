@@ -88,43 +88,54 @@
             <div class="span8">
                 @foreach (var project in Model.Projects)
                 {
-                    <article class="blog-post">
-                        <div class="post-image">
-                            <a @*To do: Add link to project here*@ href="#"><img src=@project.ImageUrl alt="" /></a>
+                <article class="blog-post">
+                    <div class="post-image">
+                        <a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id"><img src=@project.ImageUrl alt="" /></a>
+                    </div>
+                    <div class="post-heading">
+                        <h3><a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id">@project.Title</a></h3>
+                    </div>
+                    @if (project.ProjectStatus.ToString() == "InProgress")
+                    {
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: @project.Progress%;"></div>
                         </div>
-                        <div class="post-heading">
-                            <h3><a @*To do: Add link to project here*@ href="#">@project.Title</a></h3>
+                    }
+                    else
+                    {
+                        <div class="progress progress-striped">
+                            <div class="bar" style="width: 100%;"></div>
                         </div>
-                        <div class="row">
-                            <div class="span3">
-                                <div class="post-icon">
-                                    <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
-                                </div>
-                                <ul class="post-meta">
-                                    <li class="first"><i class="fas fa-user"></i><span><a @*To do: Add link to user profile here*@ href="#">@project.UserUsername</a></span></li>
-                                    <li class="first"><i class="fas fa-calendar-alt"></i><span>@project.CreatedOn.ToShortDateString()</span></li>
-                                    <li><i class="fas fa-comments"></i><span>@project.CommentsCount comments</span></li>
-                                    @if (project.ProjectStatus.ToString() == "InProgress")
-                                    {
-                                        <li class="first"><i class="fas fa-tasks"></i><span>@project.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
-                                    }
-                                    <li class="first"><i class="fas fa-star"></i><span>@project.Rating</span></li>
-                                </ul>
-                                <div class="clear"></div>
+                    }
+                    <div class="row">
+                        <div class="span3">
+                            <div class="post-icon">
+                                <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
                             </div>
-                            <div class="span5">
-                                <p>
-                                    @*To do: Add validation on content lenght and change substring length to 300*@
-                                    @project.Content
-                                </p>
-                                <a @*To do: Add link to project here*@ href="#" class="btn btn-color btn-rounded">Read more</a>
-                            </div>
+                            <ul class="post-meta">
+                                <li class="first"><i class="fas fa-user"></i><span><a @*To do: Add link to user profile here*@ href="#">@project.UserUsername</a></span></li>
+                                <li class="first"><i class="fas fa-calendar-alt"></i><span>@project.CreatedOn.ToShortDateString()</span></li>
+                                <li><i class="fas fa-comments"></i><span>@project.CommentsCount comments</span></li>
+                                @if (project.ProjectStatus.ToString() == "InProgress")
+                                {
+                                    <li class="first"><i class="fas fa-tasks"></i><span>@project.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+                                }
+                                else
+                                {
+                                    <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
+                                }
+                                <li class="first"><i class="fas fa-star"></i><span>@project.Rating</span></li>
+                            </ul>
+                            <div class="clear"></div>
                         </div>
-                    </article>
+                        <div class="span5">
+                            <p>
+                                @project.Summary
+                            </p>
+                            <a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id" class="btn btn-color btn-rounded">Read more</a>
+                        </div>
+                    </div>
+                </article>
                 }
             </div>
         </div>

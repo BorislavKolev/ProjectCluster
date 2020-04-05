@@ -8,5 +8,9 @@
     public interface IProjectsService
     {
         Task<int> CreateAsync(ProjectCreateInputModel input, string userId, List<string> imageUrls);
+
+        T GetById<T>(int id);
+
+        ICollection<string> GetPictureUrls(int id);
     }
 }

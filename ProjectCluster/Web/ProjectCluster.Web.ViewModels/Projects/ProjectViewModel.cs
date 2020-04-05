@@ -1,13 +1,15 @@
-﻿namespace ProjectCluster.Web.ViewModels.Categories
+﻿namespace ProjectCluster.Web.ViewModels.Projects
 {
     using System;
-    using System.Net;
-    using System.Text.RegularExpressions;
+    using System.Collections.Generic;
+    using System.Text;
+
     using ProjectCluster.Data.Models;
     using ProjectCluster.Data.Models.Enums;
     using ProjectCluster.Services.Mapping;
+    using ProjectCluster.Web.ViewModels.Categories;
 
-    public class ProjectsInCategoryViewModel : IMapFrom<Project>
+    public class ProjectViewModel : IMapFrom<Project>
     {
         public int Id { get; set; }
 
@@ -15,27 +17,22 @@
 
         public string Content { get; set; }
 
-        public string Summary
-        {
-            get
-            {
-                var content = WebUtility.HtmlDecode(Regex.Replace(this.Content, @"<[^>]+>", string.Empty));
-                return content.Length > 300 ? content.Substring(0, 300) + "..." : content;
-            }
-        }
-
         public ProjectStatus ProjectStatus { get; set; }
 
         public double Progress { get; set; }
 
         public double Rating { get; set; }
 
-        public string ImageUrl { get; set; }
+        public int CategoryId { get; set; }
 
         public string UserUsername { get; set; }
 
         public int CommentsCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public ICollection<string> Urls { get; set; }
+
+        public IEnumerable<SidebarCategoryViewModel> SidebarCategories { get; set; }
     }
 }

@@ -263,6 +263,12 @@ a:focus {
           border-radius: 500px;
 }
 
+.img-circle-post {
+    -webkit-border-radius: 800px;
+    -moz-border-radius: 800px;
+    border-radius: 800px;
+}
+
 .row {
   margin-left: -20px;
   *zoom: 1;

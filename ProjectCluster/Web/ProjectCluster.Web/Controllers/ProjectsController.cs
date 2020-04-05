@@ -8,6 +8,7 @@
     using ProjectCluster.Data.CloudinaryHelper;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Services.Data;
+    using ProjectCluster.Web.ViewModels.Categories;
     using ProjectCluster.Web.ViewModels.Projects;
 
     public class ProjectsController : Controller
@@ -27,7 +28,14 @@
 
         public IActionResult ById(int id)
         {
-            return this.View();
+            var projectViewModel = this.projectsService.GetById<ProjectViewModel>(id);
+            var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
+            var urls = this.projectsService.GetPictureUrls(projectViewModel.Id);
+
+            projectViewModel.SidebarCategories = sidebarCategories;
+            projectViewModel.Urls = urls;
+
+            return this.View(projectViewModel);
         }
 
         [Authorize]
