@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-
+    using Ganss.XSS;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Data.Models.Enums;
     using ProjectCluster.Services.Mapping;
@@ -16,6 +16,8 @@
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public ProjectStatus ProjectStatus { get; set; }
 

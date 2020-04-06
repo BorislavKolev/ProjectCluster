@@ -29,6 +29,10 @@
         public IActionResult ById(int id)
         {
             var projectViewModel = this.projectsService.GetById<ProjectViewModel>(id);
+            if (projectViewModel == null)
+            {
+                return this.NotFound();
+            }
             var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
             var urls = this.projectsService.GetPictureUrls(projectViewModel.Id);
 

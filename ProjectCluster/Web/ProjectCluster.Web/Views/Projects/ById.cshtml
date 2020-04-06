@@ -139,7 +139,7 @@
 
                         <div class="span6">
                             <p>
-                                @Model.Content
+                                @Html.Raw(Model.SanitizedContent)
                             </p>
                         </div>
                     </div>
