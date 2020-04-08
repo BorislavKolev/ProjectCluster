@@ -23,8 +23,6 @@
 
         public double Progress { get; set; }
 
-        public double Rating { get; set; }
-
         public int CategoryId { get; set; }
 
         public string UserUsername { get; set; }

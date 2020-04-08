@@ -28,8 +28,6 @@
 
         public double Progress { get; set; }
 
-        public double Rating { get; set; }
-
         public string ImageUrl { get; set; }
 
         public string UserUsername { get; set; }
