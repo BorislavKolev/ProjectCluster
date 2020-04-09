@@ -17,6 +17,8 @@
 
         public string Content { get; set; }
 
+        public double Rating { get; set; }
+
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public ProjectStatus ProjectStatus { get; set; }

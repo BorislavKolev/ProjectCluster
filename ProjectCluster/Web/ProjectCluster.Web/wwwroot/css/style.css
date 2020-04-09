@@ -1533,16 +1533,6 @@ ul.list li {
 }
 
 
-ul.list.rating li {
-	display: inline;
-}
-
-ul.list.rating {
-	display: inline;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
 
 ul.list.strong li {
 	font-weight:600;

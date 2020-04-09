@@ -832,6 +832,17 @@ li {
   line-height: 20px;
 }
 
+ul.w3l-ratings li, .w3l-ratings a {
+    display: inline-block !important;
+    list-style: none;
+    font-size: 35px;
+}
+
+.block-stars {
+    text-align: center;
+}
+
+
 ul.unstyled,
 ol.unstyled {
   margin-left: 0;
