@@ -6,27 +6,33 @@
 
     using Microsoft.AspNetCore.Http;
 
+    using static ProjectCluster.Data.Common.ModelValidation.Project;
+
     public class ProjectCreateInputModel
     {
-        [Required]
+        [Required(ErrorMessage = EmptyTitleError)]
+        [StringLength(TitleMaxLength, MinimumLength = TitleMinLength, ErrorMessage = TitleLengthError)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = EmptyContentError)]
+        [StringLength(ContentMaxLength, MinimumLength = ContentMinLength, ErrorMessage = ContentLengthError)]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        [Required]
-        [Display(Name = "Pictures")]
+        [Required(ErrorMessage = EmptyPicturesError)]
+        [Display(Name = PicturesDisplayName)]
         public ICollection<IFormFile> Pictures { get; set; }
 
-        [Range(1, int.MaxValue)]
-        [Display(Name = "Category")]
+        [Required(ErrorMessage = EmptyCategoryError)]
+        [Display(Name = CategoryIdDisplayName)]
         public int CategoryId { get; set; }
 
-        [Required]
-        [Display(Name = "Project Status")]
+        [Required(ErrorMessage = EmptyProjectStatusError)]
+        [Display(Name = ProjectStatusDisplayName)]
         public string ProjectStatus { get; set; }
 
-        [Display(Name = "Progress Percentage")]
+        [Required(ErrorMessage = EmptyProgressError)]
+        [Display(Name = ProgressDisplayName)]
         public double Progress { get; set; }
 
         public IEnumerable<CategoryDropdownViewModel> Categories { get; set; }

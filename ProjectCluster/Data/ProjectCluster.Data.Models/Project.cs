@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
     using ProjectCluster.Data.Common.Models;
     using ProjectCluster.Data.Models.Enums;
+
+    using static ProjectCluster.Data.Common.DataValidation.Project;
 
     public class Project : BaseDeletableModel<int>
     {
@@ -17,16 +18,23 @@
             this.Ratings = new HashSet<Rating>();
         }
 
+        [Required]
+        [MaxLength(TitleMaxLength)]
         public string Title { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
+        [Required]
         public ProjectStatus ProjectStatus { get; set; }
 
+        [Required]
+        [Range(ProgressMinValue, ProgressMaxValue)]
         public double Progress { get; set; }
 
         public string ImageUrl { get; set; }
 
+        [Required]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

@@ -28,7 +28,7 @@ showRating("stars_ratings");
 
 function sendRating(projectId, rating) {
     var token = $("#starRatingsForm input[name='__RequestVerificationToken']").val();
-    var json = { projectId: projectId, rating: rating };
+    var json = { projectId: projectId, rate: rating };
 
     $.ajax({
         url: "/api/ratings",

@@ -1,6 +1,7 @@
 ﻿namespace ProjectCluster.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -43,7 +44,7 @@
         }
 
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Create()  
         {
             var categories = this.categoriesService.GetAll<CategoryDropdownViewModel>();
             var viewModel = new ProjectCreateInputModel

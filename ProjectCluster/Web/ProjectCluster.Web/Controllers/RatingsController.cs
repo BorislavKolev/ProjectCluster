@@ -24,7 +24,6 @@
             this.userManager = userManager;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<ActionResult<RatingResponseModel>> Post(RatingInputModel input)
         {
