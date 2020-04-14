@@ -1,9 +1,7 @@
 ﻿namespace ProjectCluster.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
@@ -30,9 +28,13 @@
             return query.To<T>().ToList();
         }
 
-        public T GetByName<T>(string name)
+        public T GetByName<T>(string name, int? take = null, int skip = 0)
         {
-            var category = this.categoriesRepository.All().Where(x => x.Name == name).To<T>().FirstOrDefault();
+            var category = this.categoriesRepository
+                .All()
+                .Where(x => x.Name == name)
+                .To<T>()
+                .FirstOrDefault();
 
             return category;
         }

@@ -1,9 +1,7 @@
 ﻿namespace ProjectCluster.Web.ViewModels.Categories
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
-    using AutoMapper;
+
     using ProjectCluster.Data.Models;
     using ProjectCluster.Services.Mapping;
 
@@ -19,7 +17,11 @@
 
         public string IconName { get; set; }
 
-        public IEnumerable<ProjectsInCategoryViewModel> Projects { get; set; }
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
+
+        public IEnumerable<ProjectsInCategoryViewModel> ListedProjects { get; set; }
 
         public IEnumerable<SidebarCategoryViewModel> SidebarCategories { get; set; }
     }

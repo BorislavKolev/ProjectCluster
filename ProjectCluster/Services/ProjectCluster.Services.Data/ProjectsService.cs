@@ -53,6 +53,22 @@
             return project.Id;
         }
 
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0)
+        {
+            var query = this.projectsRepository
+                .All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Where(x => x.CategoryId == categoryId)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
         public T GetById<T>(int id)
         {
             var project = this.projectsRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
@@ -69,6 +85,11 @@
                 .ToList();
 
             return pictureUrls;
+        }
+
+        public int GetProjectsCountByCaregoryId(int categoryId)
+        {
+            return this.projectsRepository.All().Count(x => x.CategoryId == categoryId);
         }
     }
 }
