@@ -42,7 +42,7 @@
             {
                 var projectPicture = new ProjectPicture
                 {
-                    PictureUrl = url,
+                    PictureUrl = url.Insert(54, "c_fill,h_600,w_1200/"),
                     ProjectId = project.Id,
                 };
 

@@ -44,7 +44,7 @@
         }
 
         [Authorize]
-        public IActionResult Create()  
+        public IActionResult Create()
         {
             var categories = this.categoriesService.GetAll<CategoryDropdownViewModel>();
             var viewModel = new ProjectCreateInputModel
