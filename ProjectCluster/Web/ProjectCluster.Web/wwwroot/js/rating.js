@@ -9,7 +9,7 @@
 
         let stars = stars_elements[a].getElementsByTagName("i");
 
-        // Algorithm
+
         let counter = 0;
 
         while (rating_number >= 1) {

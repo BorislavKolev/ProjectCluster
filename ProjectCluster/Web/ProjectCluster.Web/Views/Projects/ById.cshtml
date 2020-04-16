@@ -1,6 +1,62 @@
 ﻿@model ProjectCluster.Web.ViewModels.Projects.ProjectViewModel
 @{
     this.ViewData["Title"] = Model.Title;
+    void DisplayComments(int? parentId)
+    {
+        var comments = this.Model.Comments.Where(x => x.ParentId == parentId);
+        if (!comments.Any())
+        {
+            return;
+        }
+        if (!parentId.HasValue)
+        {
+            @foreach (var comment in comments)
+            {
+                <li class="media">
+                    @*To do: Add user avatar*@
+                    <a class="pull-left" href="#">
+                        <img class="img-circle" src="/img/small-avatar.png" alt="" />
+                    </a>
+                    <div class="media-body">
+                        @*To do: Add Link to user profile*@
+                        <h5 class="media-heading"><a href="#">@comment.UserUserName</a></h5>
+                        <span>
+                            <time datetime="@comment.CreatedOn.ToString("O")"></time>
+                        </span>
+                        <p>
+                            @comment.Content
+                        </p>
+                        <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
+                        @{ DisplayComments(comment.Id); }
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            @foreach (var comment in comments)
+            {
+                <div class="media">
+                    @*To do: Add user avatar*@
+                    <a class="pull-left" href="#">
+                        <img class="img-circle" src="/img/small-avatar.png" alt="" />
+                    </a>
+                    <div class="media-body">
+                        @*To do: Add Link to user profile*@
+                        <h5 class="media-heading"><a href="#">@comment.UserUserName</a></h5>
+                        <span>
+                            <time datetime="@comment.CreatedOn.ToString("O")"></time>
+                        </span>
+                        <p>
+                            @comment.Content
+                        </p>
+                        <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
+                        @{ DisplayComments(comment.Id); }
+                    </div>
+                </div>
+            }
+        }
+    };
 }
 
 <section id="subintro">
@@ -122,7 +178,7 @@
                             </a>
                             <ul class="post-meta">
                                 <li class="first"><i class="fas fa-user"></i><span><a @*To do: Add link to user profile here*@ href="#">@Model.UserUsername</a></span></li>
-                                <li class="first"><i class="fas fa-calendar-alt"></i><span>@Model.CreatedOn.ToShortDateString()</span></li>
+                                <li class="first"><i class="fas fa-calendar-alt"></i><span><time datetime="@Model.CreatedOn.ToString("O")"></time></span></li>
                                 <li><i class="fas fa-comments"></i><span>@Model.CommentsCount comments</span></li>
                                 <li class="first"><i class="fas fa-star"></i><span>@Model.Rating</span></li>
                                 @if (Model.ProjectStatus.ToString() == "InProgress")
@@ -177,97 +233,22 @@
                     </div>
                 </article>
                 <!-- COMMENTS -->
-                <h4>5 Comments</h4>
+                <div class="block-stars">
+                    <a class="btn btn-color btn-rounded btn-large" onclick="showAddCommentForm(0)">Add Comment</a>
+                </div>
+                <h4>@Model.CommentsCount Comments</h4>
                 <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="~/img/small-avatar.png" alt="" />
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="#">John doe</a></h5>
-                            <span>3 June, 2013</span>
-                            <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                            </p>
-                            <a href="#" class="btn btn-color btn-rounded">Reply</a>
-                            <!-- Nested media object -->
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="img-circle" src="~/img/small-avatar.png" alt="" />
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><a href="#">Tom slayer</a></h5>
-                                    <span>3 June, 2013</span>
-                                    <p>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                    </p>
-                                    <a href="#" class="btn btn-color btn-rounded">Reply</a>
-                                    <!-- Nested media object -->
-                                    <div class="media">
-                                        <a class="pull-left" href="#">
-                                            <img class="img-circle" src="~/img/small-avatar.png" alt="" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading"><a href="#">Erick doe</a></h5>
-                                            <span>3 June, 2013</span>
-                                            <p>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                            </p>
-                                            <a href="#" class="btn btn-color btn-rounded">Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Nested media object -->
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="img-circle" src="~/img/small-avatar.png" alt="" />
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><a href="#">Jimmy doe</a></h5>
-                                    <span>3 June, 2013</span>
-                                    <p>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                    </p>
-                                    <a href="#" class="btn btn-color btn-rounded">Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="~/img/small-avatar.png" alt="" />
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="#">Mike sullivan</a></h5>
-                            <span>3 June, 2013</span>
-                            <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                            </p>
-                            <a href="#" class="btn btn-color btn-rounded">Reply</a>
-                        </div>
-                    </li>
+                    @{ DisplayComments(null); }
                 </ul>
                 <!-- comment form -->
                 <div class="comment-post">
-                    <h4>Leave a comment</h4>
-                    <form action="" method="post" class="comment-form" name="comment-form">
+                    <form id="AddCommentForm" style="display: none" method="post" class="comment-form" name="AddCommentForm" asp-controller="Comments" asp-action="Create">
+                        <h4>Leave a comment</h4>
                         <div class="row">
-                            <div class="span4">
-                                <label>Name <span>*</span></label>
-                                <input type="text" placeholder="Your name" />
-                            </div>
-                            <div class="span4">
-                                <label>Email <span>*</span></label>
-                                <input type="text" placeholder="Your email" />
-                            </div>
+                            <input type="hidden" name="ParentId" value="0" />
+                            <input type="hidden" name="ProjectId" value="@this.Model.Id" />
                             <div class="span8">
-                                <label>URL</label>
-                                <input type="text" placeholder="Your website url" />
-                            </div>
-                            <div class="span8">
-                                <label>Comment <span>*</span></label>
-                                <textarea rows="9" placeholder="Your comment"></textarea>
+                                <textarea rows="9" placeholder="Your comment" name="Content" id="Content"></textarea>
                                 <button class="btn btn-color btn-rounded" type="submit">Submit</button>
                             </div>
                         </div>
@@ -281,4 +262,14 @@
 @section Scripts
 {
     <script type="text/javascript" src="~/js/rating.js"></script>
+
+    <script>
+        function showAddCommentForm(parentId) {
+            $("#AddCommentForm input[name = 'ParentId']").val(parentId);
+            $("#AddCommentForm").show();
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#AddCommentForm").offset().top
+            }, 1000);
+        }
+    </script>
 }

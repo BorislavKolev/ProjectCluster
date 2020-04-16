@@ -33,6 +33,8 @@
 
         public int CommentsCount { get; set; }
 
+        public IEnumerable<ProjectCommentViewModel> Comments { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public ICollection<string> Urls { get; set; }

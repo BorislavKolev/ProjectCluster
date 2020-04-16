@@ -32,5 +32,11 @@
 
             public const string EmptyProgressError = "Please enter project progress";
         }
+
+        public static class Comment
+        {
+            public const string EmptyContentError = "Comment should contain at least one symbol.";
+            public const string EmptyProjectIdError = "Invalid project.";
+        }
     }
 }

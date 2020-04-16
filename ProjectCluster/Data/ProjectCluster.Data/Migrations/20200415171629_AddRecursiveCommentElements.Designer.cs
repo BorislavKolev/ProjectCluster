@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectCluster.Data;
 
 namespace ProjectCluster.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200415171629_AddRecursiveCommentElements")]
+    partial class AddRecursiveCommentElements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,7 +312,7 @@ namespace ProjectCluster.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ParentId")
+                    b.Property<int?>("ParrentId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectId")
@@ -324,7 +326,7 @@ namespace ProjectCluster.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParrentId");
 
                     b.HasIndex("ProjectId");
 
@@ -540,9 +542,9 @@ namespace ProjectCluster.Data.Migrations
 
             modelBuilder.Entity("ProjectCluster.Data.Models.Comment", b =>
                 {
-                    b.HasOne("ProjectCluster.Data.Models.Comment", "Parent")
+                    b.HasOne("ProjectCluster.Data.Models.Comment", "Parrent")
                         .WithMany()
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParrentId");
 
                     b.HasOne("ProjectCluster.Data.Models.Project", "Project")
                         .WithMany("Comments")

@@ -16,11 +16,11 @@
 
         public virtual Project Project { get; set; }
 
+        public int? ParentId { get; set; }
+
+        public virtual Comment Parent { get; set; }
+
         [Required]
         public string Content { get; set; }
-
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
     }
 }
