@@ -20,5 +20,15 @@
             public const double RateMinValue = 1;
             public const double RateMaxValue = 5;
         }
+
+        public static class Comment
+        {
+            public const int ContentMaxLength = 1000;
+        }
+
+        public static class ApplicationUser
+        {
+            public const int DescriptionMaxLength = 1000;
+        }
     }
 }

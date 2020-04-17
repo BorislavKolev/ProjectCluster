@@ -35,8 +35,11 @@
 
         public static class Comment
         {
-            public const string EmptyContentError = "Comment should contain at least one symbol.";
+            public const string ContentError = "Comment should be between 1 and 1000 symbols.";
             public const string EmptyProjectIdError = "Invalid project.";
+
+            public const int ContentMinLength = 1;
+            public const int ContentMaxLength = 1000;
         }
     }
 }

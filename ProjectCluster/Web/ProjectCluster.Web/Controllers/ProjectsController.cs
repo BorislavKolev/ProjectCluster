@@ -66,7 +66,7 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var imageUrls = await CloudinaryExtension.UploadAsync(this.cloudinary, input.Pictures);
+            var imageUrls = await CloudinaryExtension.UploadMultipleAsync(this.cloudinary, input.Pictures);
 
             int projectId = await this.projectsService.CreateAsync(input, user.Id, imageUrls);
 

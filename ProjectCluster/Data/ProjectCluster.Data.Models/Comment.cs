@@ -4,6 +4,8 @@
 
     using ProjectCluster.Data.Common.Models;
 
+    using static ProjectCluster.Data.Common.DataValidation.Comment;
+
     public class Comment : BaseDeletableModel<int>
     {
         [Required]
@@ -21,6 +23,7 @@
         public virtual Comment Parent { get; set; }
 
         [Required]
+        [MaxLength(ContentMaxLength)]
         public string Content { get; set; }
     }
 }

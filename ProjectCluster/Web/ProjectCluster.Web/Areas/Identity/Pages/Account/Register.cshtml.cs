@@ -1,6 +1,5 @@
 ﻿namespace ProjectCluster.Web.Areas.Identity.Pages.Account
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -8,8 +7,10 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using ProjectCluster.Common;
+    using ProjectCluster.Data.CloudinaryHelper;
     using ProjectCluster.Data.Models;
 
     [AllowAnonymous]
@@ -26,17 +28,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly Cloudinary cloudinary;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            Cloudinary cloudinary)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.cloudinary = cloudinary;
         }
 
         [BindProperty]
@@ -48,6 +53,10 @@
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -63,6 +72,12 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [StringLength(1000, ErrorMessage = "Description shouldn't be longer than 1000 symbols.")]
+            public string Description { get; set; }
+
+            [FromForm(Name = "body")]
+            public IFormFile Avatar { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -77,7 +92,21 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
+                var avatarUrl = "https://res.cloudinary.com/sharwinchester/image/upload/v1587146749/Categories/avatar_jspqvd.png";
+
+                if (this.Input.Avatar != null)
+                {
+                    avatarUrl = await CloudinaryExtension.UploadSingleAsync(this.cloudinary, this.Input.Avatar);
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = this.Input.Username,
+                    Email = this.Input.Email,
+                    Description = this.Input.Description,
+                    AvatarUrl = avatarUrl,
+                };
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {

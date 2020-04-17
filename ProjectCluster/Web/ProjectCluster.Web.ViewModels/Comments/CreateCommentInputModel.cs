@@ -11,8 +11,9 @@
 
         public int ParentId { get; set; }
 
-        [Required(ErrorMessage = EmptyContentError)]
+        [Required(ErrorMessage = ContentError)]
         [DataType(DataType.MultilineText)]
+        [StringLength(ContentMaxLength, MinimumLength = ContentMinLength, ErrorMessage = ContentError)]
         public string Content { get; set; }
     }
 }

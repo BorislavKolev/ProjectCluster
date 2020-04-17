@@ -3,9 +3,12 @@ namespace ProjectCluster.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
     using ProjectCluster.Data.Common.Models;
+
+    using static ProjectCluster.Data.Common.DataValidation.ApplicationUser;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -34,6 +37,11 @@ namespace ProjectCluster.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        [MaxLength(DescriptionMaxLength)]
+        public string Description { get; set; }
+
+        public string AvatarUrl { get; set; }
 
         public ICollection<Project> Projects { get; set; }
 
