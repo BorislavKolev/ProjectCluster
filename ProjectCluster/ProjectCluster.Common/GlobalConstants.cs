@@ -11,5 +11,7 @@
         public const string AdministratorEmail = "admin@admin.com";
 
         public const string AdministratorPassword = "admin123456";
+
+        public const string UserRoleName = "User";
     }
 }

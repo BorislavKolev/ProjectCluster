@@ -3,5 +3,7 @@
     public class RatingResponseModel
     {
         public double Rating { get; set; }
+
+        public string AuthenticationErrorMessage { get; set; }
     }
 }

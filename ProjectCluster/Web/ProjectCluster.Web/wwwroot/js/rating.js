@@ -38,7 +38,12 @@ function sendRating(projectId, rating) {
         dataType: "json",
         headers: { 'X-CSRF-TOKEN': token },
         success: function (data) {       
-            // Update Ratings on all divs
+            if (data.authenticationErrorMessage != null) {
+                let authenticate_error = document.getElementById("error");
+                authenticate_error.style.display = "block";
+                authenticate_error.innerHTML = data.authenticationErrorMessage;
+            }
+            
             let elements = document.getElementsByClassName("project_" + projectId);
             for (let a = 0; a < elements.length; a++) {
                 let votes = elements[a].querySelector(".starRatingsSum");

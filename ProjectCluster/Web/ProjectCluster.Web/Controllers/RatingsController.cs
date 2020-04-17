@@ -27,11 +27,21 @@
         [HttpPost]
         public async Task<ActionResult<RatingResponseModel>> Post(RatingInputModel input)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            await this.ratingsService.RateAsync(input.ProjectId, user.Id, input.Rate);
-            var rating = this.ratingsService.GetRating(input.ProjectId);
+            var userId = this.userManager.GetUserId(this.User);
+            var ratingResponseModel = new RatingResponseModel();
 
-            return new RatingResponseModel { Rating = rating };
+            if (userId == null)
+            {
+                ratingResponseModel.AuthenticationErrorMessage = "Please log in in order to vote.";
+                ratingResponseModel.Rating = this.ratingsService.GetRating(input.ProjectId);
+
+                return ratingResponseModel;
+            }
+
+            await this.ratingsService.RateAsync(input.ProjectId, userId, input.Rate);
+            ratingResponseModel.Rating = this.ratingsService.GetRating(input.ProjectId);
+
+            return ratingResponseModel;
         }
     }
 }
