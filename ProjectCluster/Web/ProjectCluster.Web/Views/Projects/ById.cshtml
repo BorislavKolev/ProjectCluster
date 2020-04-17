@@ -26,9 +26,12 @@
                         <p>
                             @comment.Content
                         </p>
-                        <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
-                        @{ DisplayComments(comment.Id); }
-                    </div>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
+                        }
+                            @{ DisplayComments(comment.Id); }
+                        </div>
                 </li>
             }
         }
@@ -50,7 +53,10 @@
                         <p>
                             @comment.Content
                         </p>
-                        <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
+                        }
                         @{ DisplayComments(comment.Id); }
                     </div>
                 </div>
@@ -234,7 +240,10 @@
                 </article>
                 <!-- COMMENTS -->
                 <div class="block-stars">
-                    <a class="btn btn-color btn-rounded btn-large" onclick="showAddCommentForm(0)">Add Comment</a>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-color btn-rounded btn-large" onclick="showAddCommentForm(0)">Add Comment</a>
+                    }
                 </div>
                 <h4>@Model.CommentsCount Comments</h4>
                 <ul class="media-list">
