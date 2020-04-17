@@ -5,14 +5,17 @@
 
     using ProjectCluster.Data;
     using ProjectCluster.Data.Common.Repositories;
+    using ProjectCluster.Data.Models;
 
     public class RatingsService : IRatingsService
     {
         private readonly IRepository<Rating> ratingsRepository;
+        private readonly IDeletableEntityRepository<Project> projectsRepository;
 
-        public RatingsService(IRepository<Rating> ratingsRepository)
+        public RatingsService(IRepository<Rating> ratingsRepository, IDeletableEntityRepository<Project> projectsRepository)
         {
             this.ratingsRepository = ratingsRepository;
+            this.projectsRepository = projectsRepository;
         }
 
         public double GetRating(int projectId)
@@ -27,10 +30,20 @@
 
         public double GetUserAverageRating(string userId)
         {
-            var rating = this.ratingsRepository
-                .All()
-                .Where(x => x.UserId == userId)
-                .Average(x => x.Rate);
+            double rating = 0;
+            var isUserHaveProjects = this.projectsRepository.All().Any(x => x.UserId == userId);
+            if (isUserHaveProjects)
+            {
+                var projectsByUser = this.projectsRepository.All().Where(x => x.UserId == userId).ToList();
+                double projectsByUserRatingSum = 0;
+                foreach (var project in projectsByUser)
+                {
+                    var projectAverageRating = this.GetRating(project.Id);
+                    projectsByUserRatingSum += projectAverageRating;
+                }
+
+                rating = projectsByUserRatingSum / projectsByUser.Count();
+            }
 
             return rating;
         }

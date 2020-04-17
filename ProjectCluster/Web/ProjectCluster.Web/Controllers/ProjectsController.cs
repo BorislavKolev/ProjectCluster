@@ -34,6 +34,7 @@
             {
                 return this.NotFound();
             }
+
             var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
             var urls = this.projectsService.GetPictureUrls(projectViewModel.Id);
 

@@ -21,7 +21,7 @@
 
         public int PagesCount { get; set; }
 
-        public IEnumerable<ProjectsInCategoryViewModel> ListedProjects { get; set; }
+        public IEnumerable<ProjectsInProfileViewModel> ListedProjects { get; set; }
 
         public IEnumerable<SidebarCategoryViewModel> SidebarCategories { get; set; }
     }

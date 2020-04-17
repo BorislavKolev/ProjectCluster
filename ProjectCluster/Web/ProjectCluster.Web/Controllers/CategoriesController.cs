@@ -26,7 +26,7 @@
             var count = this.projectsService.GetProjectsCountByCaregoryId(viewModel.Id);
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
-            viewModel.ListedProjects = this.projectsService.GetByCategoryId<ProjectsInCategoryViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage); 
+            viewModel.ListedProjects = this.projectsService.GetByCategoryId<ProjectsInProfileViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage); 
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

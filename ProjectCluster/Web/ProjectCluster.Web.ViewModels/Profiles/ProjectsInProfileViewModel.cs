@@ -1,4 +1,4 @@
-﻿namespace ProjectCluster.Web.ViewModels.Categories
+﻿namespace ProjectCluster.Web.ViewModels.Profiles
 {
     using System;
     using System.Net;
