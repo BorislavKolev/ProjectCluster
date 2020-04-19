@@ -131,6 +131,7 @@
                         endpoints.MapControllerRoute("categoriesRoute", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("projectRoute", "Projects/{id}", new { controller = "Projects", action = "ById" });
+                        endpoints.MapControllerRoute("profilesRoute", "Profile/{username}", new { controller = "Profiles", action = "ByUsername" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

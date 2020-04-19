@@ -33,6 +33,8 @@
 
         public string UserUsername { get; set; }
 
+        public double Rating { get; set; }
+
         public int CommentsCount { get; set; }
 
         public DateTime CreatedOn { get; set; }

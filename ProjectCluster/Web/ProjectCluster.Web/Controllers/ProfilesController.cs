@@ -1,15 +1,12 @@
 ﻿namespace ProjectCluster.Web.Controllers
 {
-    using Microsoft.AspNetCore.Identity;
+    using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
     using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Services.Data;
     using ProjectCluster.Web.ViewModels.Profiles;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class ProfilesController : BaseController
     {
@@ -29,8 +26,13 @@
             var userId = this.userRepository.All().FirstOrDefault(x => x.UserName == username).Id;
             var viewModel = this.profilesService.GetById<ProfileViewModel>(userId);
             viewModel.UserAverageRating = this.ratingsService.GetUserAverageRating(userId);
+            viewModel.AvatarUrl = viewModel.AvatarUrl.Insert(54, "c_fill,h_250,w_250/");
+            foreach (var project in viewModel.Projects)
+            {
+                project.Rating = this.ratingsService.GetRating(project.Id);
+            }
 
-            return this.View();
+            return this.View(viewModel);
         }
     }
 }

@@ -20,10 +20,15 @@
 
         public double GetRating(int projectId)
         {
-            var rating = this.ratingsRepository
-                .All()
-                .Where(x => x.ProjectId == projectId)
-                .Average(x => x.Rate);
+            double rating = 0;
+            var isProjectHaveRating = this.ratingsRepository.All().Any(x => x.ProjectId == projectId);
+            if (isProjectHaveRating)
+            {
+                rating = this.ratingsRepository
+               .All()
+               .Where(x => x.ProjectId == projectId)
+               .Average(x => x.Rate);
+            }
 
             return rating;
         }

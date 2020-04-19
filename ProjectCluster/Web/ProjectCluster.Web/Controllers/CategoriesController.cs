@@ -12,11 +12,13 @@
 
         private readonly ICategoriesService categoriesService;
         private readonly IProjectsService projectsService;
+        private readonly IRatingsService ratingsService;
 
-        public CategoriesController(ICategoriesService categoriesService, IProjectsService projectsService)
+        public CategoriesController(ICategoriesService categoriesService, IProjectsService projectsService, IRatingsService ratingsService)
         {
             this.categoriesService = categoriesService;
             this.projectsService = projectsService;
+            this.ratingsService = ratingsService;
         }
 
         public IActionResult ByName(string name, int page = 1)
@@ -26,7 +28,12 @@
             var count = this.projectsService.GetProjectsCountByCaregoryId(viewModel.Id);
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
-            viewModel.ListedProjects = this.projectsService.GetByCategoryId<ProjectsInProfileViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage); 
+            viewModel.ListedProjects = this.projectsService.GetByCategoryId<ProjectsInProfileViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);
+            foreach (var project in viewModel.ListedProjects)
+            {
+                project.Rating = this.ratingsService.GetRating(project.Id);
+            }
+
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

@@ -113,7 +113,7 @@
                                     <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
                                 </div>
                                 <ul class="post-meta">
-                                    <li class="first"><i class="fas fa-user"></i><span><a @*To do: Add link to user profile here*@ href="#">@project.UserUsername</a></span></li>
+                                    <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@project.UserUsername">@project.UserUsername</a></span></li>
                                     <li class="first"><i class="fas fa-calendar-alt"></i><span>@project.CreatedOn.ToShortDateString()</span></li>
                                     <li><i class="fas fa-comments"></i><span>@project.CommentsCount comments</span></li>
                                     @if (project.ProjectStatus.ToString() == "InProgress")
@@ -124,7 +124,7 @@
                                     {
                                         <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
                                     }
-                                    <li class="first"><i class="fas fa-star"></i><span></span></li>
+                                    <li class="first"><i class="fas fa-star"></i><span>@project.Rating</span></li>
                                 </ul>
                                 <div class="clear"></div>
                             </div>

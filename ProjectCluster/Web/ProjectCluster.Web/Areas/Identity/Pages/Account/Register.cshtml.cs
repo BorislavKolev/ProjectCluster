@@ -51,6 +51,9 @@
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        [BindProperty]
+        public IFormFile File { get; set; }
+
         public class InputModel
         {
             [Required]
@@ -76,7 +79,6 @@
             [StringLength(1000, ErrorMessage = "Description shouldn't be longer than 1000 symbols.")]
             public string Description { get; set; }
 
-            [FromForm(Name = "body")]
             public IFormFile Avatar { get; set; }
         }
 
@@ -94,9 +96,9 @@
             {
                 var avatarUrl = "https://res.cloudinary.com/sharwinchester/image/upload/v1587146749/Categories/avatar_jspqvd.png";
 
-                if (this.Input.Avatar != null)
+                if (this.File != null)
                 {
-                    avatarUrl = await CloudinaryExtension.UploadSingleAsync(this.cloudinary, this.Input.Avatar);
+                    avatarUrl = await CloudinaryExtension.UploadSingleAsync(this.cloudinary, this.File);
                 }
 
                 var user = new ApplicationUser

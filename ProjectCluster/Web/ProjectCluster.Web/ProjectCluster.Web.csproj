@@ -46,8 +46,4 @@
     <ProjectReference Include="..\ProjectCluster.Web.Infrastructure\ProjectCluster.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ProjectCluster.Web.ViewModels\ProjectCluster.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Profiles\" />
-  </ItemGroup>
 </Project>

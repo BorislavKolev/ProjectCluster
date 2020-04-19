@@ -18,8 +18,7 @@
                         <img class="img-circle" src="/img/small-avatar.png" alt="" />
                     </a>
                     <div class="media-body">
-                        @*To do: Add Link to user profile*@
-                        <h5 class="media-heading"><a href="#">@comment.UserUserName</a></h5>
+                        <h5 class="media-heading"><a href="/Profile/@comment.UserUserName">@comment.UserUserName</a></h5>
                         <span>
                             <time datetime="@comment.CreatedOn.ToString("O")"></time>
                         </span>
@@ -45,8 +44,7 @@
                         <img class="img-circle" src="/img/small-avatar.png" alt="" />
                     </a>
                     <div class="media-body">
-                        @*To do: Add Link to user profile*@
-                        <h5 class="media-heading"><a href="#">@comment.UserUserName</a></h5>
+                        <h5 class="media-heading"><a href="/Profile/@comment.UserUserName">@comment.UserUserName</a></h5>
                         <span>
                             <time datetime="@comment.CreatedOn.ToString("O")"></time>
                         </span>
@@ -183,7 +181,7 @@
                                 <img class="img-circle-post" src="~/img/avatar.png" alt="" />
                             </a>
                             <ul class="post-meta">
-                                <li class="first"><i class="fas fa-user"></i><span><a @*To do: Add link to user profile here*@ href="#">@Model.UserUsername</a></span></li>
+                                <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@Model.UserUsername">@Model.UserUsername</a></span></li>
                                 <li class="first"><i class="fas fa-calendar-alt"></i><span><time datetime="@Model.CreatedOn.ToString("O")"></time></span></li>
                                 <li><i class="fas fa-comments"></i><span>@Model.CommentsCount comments</span></li>
                                 <li class="first"><i class="fas fa-star"></i><span>@Model.Rating</span></li>

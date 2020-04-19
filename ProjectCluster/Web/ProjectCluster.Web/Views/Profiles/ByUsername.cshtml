@@ -1,0 +1,121 @@
+﻿@model ProjectCluster.Web.ViewModels.Profiles.ProfileViewModel
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Profile";
+}
+<section id="subintro">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <h3><strong>User Profile</strong></h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="clearfix">
+                    </div>
+                    <div>
+                        <div class="span3">
+                            <img class="img-circle-post" src="@Model.AvatarUrl" alt="" />
+                            <div class="heading">
+                                <h3 class="aligncenter"><strong>@Model.UserName</strong></h3>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <aside>
+                                <div class="widget">
+                                    <h4>User information</h4>
+                                    <ul class="project-detail">
+                                        <li><i class="fas fa-comments"></i> Member since: @Model.MemberSince.ToShortDateString()</li>
+                                        <li><i class="fas fa-comments"></i> Total projects: @Model.Projects.Count</li>
+                                        <li><i class="fas fa-comments"></i> Average project rating: @Model.UserAverageRating.ToString("F2", CultureInfo.InvariantCulture)</li>
+                                        <li><i class="fas fa-comments"></i> Email: @Model.Email</li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="clearfix">
+                    </div>
+                    <div class="span7">
+                        <h2>User description</h2>
+                        <p>@Model.Description</p>
+                        <hr />
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="clearfix">
+                    </div>
+                    <div class="span7">
+                        @foreach (var project in Model.Projects)
+                        {
+                            <article class="blog-post">
+                                <div class="post-image">
+                                    <a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id"><img src=@project.ImageUrl alt="" /></a>
+                                </div>
+                                <div class="post-heading">
+                                    <h3><a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id">@project.Title</a></h3>
+                                </div>
+                                @if (project.ProjectStatus.ToString() == "InProgress")
+                                {
+                                    <div class="progress progress-striped active">
+                                        <div class="bar" style="width: @project.Progress%;"></div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="progress progress-striped">
+                                        <div class="bar" style="width: 100%;"></div>
+                                    </div>
+                                }
+                                <div class="row">
+                                    <div class="span3">
+                                        <div class="post-icon">
+                                            <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
+                                        </div>
+                                        <ul class="post-meta">
+                                            <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@project.UserUsername">@project.UserUsername</a></span></li>
+                                            <li class="first"><i class="fas fa-calendar-alt"></i><span>@project.CreatedOn.ToShortDateString()</span></li>
+                                            <li><i class="fas fa-comments"></i><span>@project.CommentsCount comments</span></li>
+                                            @if (project.ProjectStatus.ToString() == "InProgress")
+                                            {
+                                                <li class="first"><i class="fas fa-tasks"></i><span>@project.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
+                                            }
+                                            <li class="first"><i class="fas fa-star"></i><span>@project.Rating</span></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="span4">
+                                        <p>
+                                            @project.Summary
+                                        </p>
+                                        <a asp-controller="Projects" asp-action="ById" asp-route-id="@project.Id" class="btn btn-color btn-rounded">Read more</a>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
