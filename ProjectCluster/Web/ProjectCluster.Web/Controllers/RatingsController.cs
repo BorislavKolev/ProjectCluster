@@ -35,6 +35,13 @@
                 return ratingResponseModel;
             }
 
+            if (input.Rate < 1 || input.Rate > 5)
+            {
+                ratingResponseModel.Rating = this.ratingsService.GetRating(input.ProjectId);
+
+                return ratingResponseModel;
+            }
+
             await this.ratingsService.RateAsync(input.ProjectId, userId, input.Rate);
             ratingResponseModel.Rating = this.ratingsService.GetRating(input.ProjectId);
 

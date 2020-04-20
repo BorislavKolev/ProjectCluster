@@ -23,7 +23,16 @@
 
         public IActionResult ByUsername(string username)
         {
-            var userId = this.userRepository.All().FirstOrDefault(x => x.UserName == username).Id;
+            string userId = string.Empty;
+            try
+            {
+                userId = this.userRepository.All().FirstOrDefault(x => x.UserName == username).Id;
+            }
+            catch (System.Exception)
+            {
+                return this.RedirectToAction("HttpError", new { statusCode = 404 });
+            }
+
             var viewModel = this.profilesService.GetById<ProfileViewModel>(userId);
             viewModel.UserAverageRating = this.ratingsService.GetUserAverageRating(userId);
             viewModel.AvatarUrl = viewModel.AvatarUrl.Insert(54, "c_fill,h_250,w_250/");
