@@ -40,7 +40,7 @@
                 }
             }
 
-            await this.commentsService.Create(input.ProjectId, user.Id, input.Content, parentId);
+            await this.commentsService.CreateAsync(input.ProjectId, user.Id, input.Content, parentId);
 
             return this.RedirectToAction("ById", "Projects", new { id = input.ProjectId });
         }
