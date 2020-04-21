@@ -25,7 +25,7 @@
         {
             var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
             var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
-            var count = this.projectsService.GetProjectsCountByCaregoryId(viewModel.Id);
+            var count = this.projectsService.GetProjectsCountByCategoryId(viewModel.Id);
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
             viewModel.ListedProjects = this.projectsService.GetByCategoryId<ProjectsInProfileViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);

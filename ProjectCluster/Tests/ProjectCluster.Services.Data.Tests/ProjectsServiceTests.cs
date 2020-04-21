@@ -39,7 +39,7 @@
             };
             this.testProject2 = new Project
             {
-                CategoryId = 2,
+                CategoryId = 1,
                 UserId = "someOtherUserId",
                 Title = "Olives",
                 Content = "Olives are delicious",
@@ -84,6 +84,68 @@
             Assert.Equal(2, this.projectPicturesRepository.All().Count());
         }
 
+        [Fact]
+        public async Task GetByCategoryId_ShouldReturnAllProjectsFromCategory()
+        {
+            this.Initialize();
+            AutoMapperConfig.RegisterMappings(typeof(MappedProject).Assembly);
+            await this.projectsRepository.AddAsync(this.testProject1);
+            await this.projectsRepository.AddAsync(this.testProject2);
+            await this.projectsRepository.AddAsync(this.testProject3);
+            await this.projectsRepository.SaveChangesAsync();
+
+            var resultCategories = this.service.GetByCategoryId<MappedProject>(1);
+
+            Assert.Equal(2, resultCategories.Count());
+        }
+
+        [Fact]
+        public async Task GetById_ShouldReturnRightProject()
+        {
+            this.Initialize();
+            AutoMapperConfig.RegisterMappings(typeof(MappedProject).Assembly);
+            await this.projectsRepository.AddAsync(this.testProject1);
+            await this.projectsRepository.AddAsync(this.testProject2);
+            await this.projectsRepository.AddAsync(this.testProject3);
+            await this.projectsRepository.SaveChangesAsync();
+
+            var resultProject = this.service.GetById<MappedProject>(1);
+
+            Assert.Equal(this.testProject1.Content, resultProject.Content);
+        }
+
+        [Fact]
+        public async Task GetPictureUrls_ShouldReturnRightPictureUrls()
+        {
+            this.Initialize();
+            var testPictureProjectEntity1 = new ProjectPicture { ProjectId = 1, PictureUrl = "SomePictureUrl" };
+            var testPictureProjectEntity2 = new ProjectPicture { ProjectId = 1, PictureUrl = "SomeOtherPictureUrl" };
+            var testPictureProjectEntity3 = new ProjectPicture { ProjectId = 2, PictureUrl = "YetAnotherPictureUrl" };
+            await this.projectPicturesRepository.AddAsync(testPictureProjectEntity1);
+            await this.projectPicturesRepository.AddAsync(testPictureProjectEntity2);
+            await this.projectPicturesRepository.AddAsync(testPictureProjectEntity3);
+            await this.projectPicturesRepository.SaveChangesAsync();
+
+            var resultPictureUrls = this.service.GetPictureUrls(1);
+
+            Assert.Equal(testPictureProjectEntity1.PictureUrl, resultPictureUrls.ElementAt(0));
+            Assert.Equal(testPictureProjectEntity2.PictureUrl, resultPictureUrls.ElementAt(1));
+        }
+
+        [Fact]
+        public async Task GetProjectsCountByCategoryId_ShouldReturnRightProjectCount()
+        {
+            this.Initialize();
+            await this.projectsRepository.AddAsync(this.testProject1);
+            await this.projectsRepository.AddAsync(this.testProject2);
+            await this.projectsRepository.AddAsync(this.testProject3);
+            await this.projectsRepository.SaveChangesAsync();
+
+            var resultCount = this.service.GetProjectsCountByCategoryId(1);
+
+            Assert.Equal(2, resultCount);
+        }
+
         internal void Initialize()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -93,7 +155,7 @@
             this.service = new ProjectsService(this.projectsRepository, this.projectPicturesRepository);
         }
 
-        public class MappedProjects : IMapFrom<Project>
+        public class MappedProject : IMapFrom<Project>
         {
             public string Title { get; set; }
 

@@ -87,7 +87,7 @@
             return pictureUrls;
         }
 
-        public int GetProjectsCountByCaregoryId(int categoryId)
+        public int GetProjectsCountByCategoryId(int categoryId)
         {
             return this.projectsRepository.All().Count(x => x.CategoryId == categoryId);
         }
