@@ -26,10 +26,6 @@
 
         public CategoriesServiceTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            var dbContext = new ApplicationDbContext(options.Options);
-            this.repository = new EfDeletableEntityRepository<Category>(dbContext);
-            this.service = new CategoriesService(this.repository);
             this.testCategory1 = new Category
             {
                 Name = "Cars",
@@ -56,6 +52,7 @@
         [Fact]
         public async Task GetAll_ShouldReturnAllCategories()
         {
+            this.Initialize();
             AutoMapperConfig.RegisterMappings(typeof(MappedCategory).Assembly);
             await this.repository.AddAsync(this.testCategory1);
             await this.repository.AddAsync(this.testCategory2);
@@ -96,6 +93,7 @@
         [Fact]
         public async Task GetByName_ShouldReturnRightCategory()
         {
+            this.Initialize();
             AutoMapperConfig.RegisterMappings(typeof(MappedCategory).Assembly);
             await this.repository.AddAsync(this.testCategory1);
             await this.repository.AddAsync(this.testCategory2);
@@ -106,6 +104,14 @@
             var actualCategory = this.service.GetByName<MappedCategory>("Art");
 
             Assert.Equal(expectedCategoryName, actualCategory.Name);
+        }
+
+        internal void Initialize()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var dbContext = new ApplicationDbContext(options.Options);
+            this.repository = new EfDeletableEntityRepository<Category>(dbContext);
+            this.service = new CategoriesService(this.repository);
         }
 
         public class MappedCategory : IMapFrom<Category>

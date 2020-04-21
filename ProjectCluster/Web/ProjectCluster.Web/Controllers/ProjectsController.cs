@@ -69,7 +69,7 @@
 
             var imageUrls = await CloudinaryExtension.UploadMultipleAsync(this.cloudinary, input.Pictures);
 
-            int projectId = await this.projectsService.CreateAsync(input, user.Id, imageUrls);
+            int projectId = await this.projectsService.CreateAsync(input.CategoryId, input.Content, input.Title, input.ProjectStatus, input.Progress, user.Id, imageUrls);
 
             return this.RedirectToAction("ById", new { id = projectId });
         }

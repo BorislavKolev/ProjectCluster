@@ -7,7 +7,7 @@
 
     public interface IProjectsService
     {
-        Task<int> CreateAsync(ProjectCreateInputModel input, string userId, List<string> imageUrls);
+        Task<int> CreateAsync(int categoryId, string content, string title, string projectStatus, double progress, string userId, List<string> imageUrls);
 
         T GetById<T>(int id);
 

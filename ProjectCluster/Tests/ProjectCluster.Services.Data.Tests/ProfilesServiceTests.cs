@@ -26,10 +26,6 @@
 
         public ProfilesServiceTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            var dbContext = new ApplicationDbContext(options.Options);
-            this.repository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
-            this.service = new ProfilesService(this.repository);
             this.testUser1 = new ApplicationUser
             {
                 Id = "userId",
@@ -53,6 +49,7 @@
         [Fact]
         public async Task GetAll_ShouldReturnAllCategories()
         {
+            this.Initialize();
             AutoMapperConfig.RegisterMappings(typeof(MappedApplicationUser).Assembly);
             await this.repository.AddAsync(this.testUser1);
             await this.repository.AddAsync(this.testUser2);
@@ -68,6 +65,14 @@
             var actualProfile = this.service.GetById<MappedApplicationUser>(this.testUser1.Id);
 
             Assert.Equal(mappedApplicationUser1.Id, actualProfile.Id);
+        }
+
+        internal void Initialize()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var dbContext = new ApplicationDbContext(options.Options);
+            this.repository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            this.service = new ProfilesService(this.repository);
         }
 
         public class MappedApplicationUser : IMapFrom<ApplicationUser>

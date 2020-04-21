@@ -22,15 +22,15 @@
             this.projectPicturesRepository = projectPicturesRepository;
         }
 
-        public async Task<int> CreateAsync(ProjectCreateInputModel input, string userId, List<string> imageUrls)
+        public async Task<int> CreateAsync(int categoryId, string content, string title, string projectStatus, double progress, string userId, List<string> imageUrls)
         {
             var project = new Project
             {
-                CategoryId = input.CategoryId,
-                Content = input.Content,
-                Title = input.Title,
-                ProjectStatus = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), input.ProjectStatus),
-                Progress = input.ProjectStatus == "Finished" ? 100 : input.Progress,
+                CategoryId = categoryId,
+                Content = content,
+                Title = title,
+                ProjectStatus = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), projectStatus),
+                Progress = projectStatus == "Finished" ? 100 : progress,
                 UserId = userId,
                 ImageUrl = imageUrls.First().Insert(54, "c_fill,h_600,w_1200/"),
             };

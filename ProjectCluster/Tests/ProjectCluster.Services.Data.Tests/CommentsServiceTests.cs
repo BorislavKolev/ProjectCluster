@@ -26,10 +26,6 @@
 
         public CommentsServiceTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            var dbContext = new ApplicationDbContext(options.Options);
-            this.repository = new EfDeletableEntityRepository<Comment>(dbContext);
-            this.service = new CommentsService(this.repository);
             this.testComment1 = new Comment
             {
                 UserId = "someId",
@@ -53,6 +49,8 @@
         [Fact]
         public async Task CreateCommentAsync_ShouldCreateRightComment()
         {
+            this.Initialize();
+
             await this.service.CreateAsync(this.testComment1.ProjectId, this.testComment1.UserId, this.testComment1.Content);
             var actualComment = this.repository.All().First();
 
@@ -62,6 +60,7 @@
         [Fact]
         public async Task IsInProject_ShouldWork()
         {
+            this.Initialize();
             await this.repository.AddAsync(this.testComment1);
             await this.repository.SaveChangesAsync();
             var commentId = this.repository.All().Select(x => x.Id).FirstOrDefault();
@@ -69,6 +68,14 @@
             bool result = this.service.IsInProjectId(commentId, this.testComment1.ProjectId);
 
             Assert.True(result);
+        }
+
+        internal void Initialize()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var dbContext = new ApplicationDbContext(options.Options);
+            this.repository = new EfDeletableEntityRepository<Comment>(dbContext);
+            this.service = new CommentsService(this.repository);
         }
     }
 }
