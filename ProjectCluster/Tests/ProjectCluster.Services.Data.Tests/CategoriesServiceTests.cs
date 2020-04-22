@@ -3,21 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
-    using Moq;
     using ProjectCluster.Data;
-    using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Data.Repositories;
     using ProjectCluster.Services.Data;
     using ProjectCluster.Services.Mapping;
     using Xunit;
 
-    public class CategoriesServiceTests
+    public class CategoriesServiceTests : IDisposable
     {
+        private ApplicationDbContext dbContext;
         private EfDeletableEntityRepository<Category> repository;
         private CategoriesService service;
         private Category testCategory1;
@@ -47,6 +45,12 @@
                 IconName = "fas fa-palette",
                 ImageUrl = "https://res.cloudinary.com/sharwinchester/image/upload/c_fill,h_370,w_590/v1584958919/Categories/art_iac8id.jpg",
             };
+        }
+
+        public void Dispose()
+        {
+            this.dbContext.Dispose();
+            this.repository.Dispose();
         }
 
         [Fact]
@@ -88,6 +92,7 @@
             {
                 Assert.Equal(expectedList.ElementAt(i).Name, actualList.ElementAt(i).Name);
             }
+            this.Dispose();
         }
 
         [Fact]
@@ -104,13 +109,14 @@
             var actualCategory = this.service.GetByName<MappedCategory>("Art");
 
             Assert.Equal(expectedCategoryName, actualCategory.Name);
+            this.Dispose();
         }
 
         internal void Initialize()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            var dbContext = new ApplicationDbContext(options.Options);
-            this.repository = new EfDeletableEntityRepository<Category>(dbContext);
+            this.dbContext = new ApplicationDbContext(options.Options);
+            this.repository = new EfDeletableEntityRepository<Category>(this.dbContext);
             this.service = new CategoriesService(this.repository);
         }
 

@@ -3,13 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
-    using Moq;
     using ProjectCluster.Data;
-    using ProjectCluster.Data.Common.Repositories;
     using ProjectCluster.Data.Models;
     using ProjectCluster.Data.Models.Enums;
     using ProjectCluster.Data.Repositories;
@@ -17,8 +14,9 @@
     using ProjectCluster.Services.Mapping;
     using Xunit;
 
-    public class ProjectsServiceTests
+    public class ProjectsServiceTests : IDisposable
     {
+        private ApplicationDbContext dbContext;
         private EfDeletableEntityRepository<Project> projectsRepository;
         private EfDeletableEntityRepository<ProjectPicture> projectPicturesRepository;
         private ProjectsService service;
@@ -57,6 +55,13 @@
             };
         }
 
+        public void Dispose()
+        {
+            this.dbContext.Dispose();
+            this.projectsRepository.Dispose();
+            this.projectPicturesRepository.Dispose();
+        }
+
         [Fact]
         public async Task CreateAsync_ShouldWork()
         {
@@ -69,6 +74,7 @@
             var actualProject = this.projectsRepository.All().First();
 
             Assert.Equal(this.testProject1.Content, actualProject.Content);
+            this.Dispose();
         }
 
         [Fact]
@@ -82,6 +88,7 @@
             await this.service.CreateAsync(this.testProject1.CategoryId, this.testProject1.Content, this.testProject1.Title, this.testProject1.ProjectStatus.ToString(), this.testProject1.Progress, this.testProject1.UserId, testImageUrls);
 
             Assert.Equal(2, this.projectPicturesRepository.All().Count());
+            this.Dispose();
         }
 
         [Fact]
@@ -97,6 +104,7 @@
             var resultCategories = this.service.GetByCategoryId<MappedProject>(1);
 
             Assert.Equal(2, resultCategories.Count());
+            this.Dispose();
         }
 
         [Fact]
@@ -112,6 +120,7 @@
             var resultProject = this.service.GetById<MappedProject>(1);
 
             Assert.Equal(this.testProject1.Content, resultProject.Content);
+            this.Dispose();
         }
 
         [Fact]
@@ -130,6 +139,7 @@
 
             Assert.Equal(testPictureProjectEntity1.PictureUrl, resultPictureUrls.ElementAt(0));
             Assert.Equal(testPictureProjectEntity2.PictureUrl, resultPictureUrls.ElementAt(1));
+            this.Dispose();
         }
 
         [Fact]
@@ -144,14 +154,15 @@
             var resultCount = this.service.GetProjectsCountByCategoryId(1);
 
             Assert.Equal(2, resultCount);
+            this.Dispose();
         }
 
         internal void Initialize()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            var dbContext = new ApplicationDbContext(options.Options);
-            this.projectsRepository = new EfDeletableEntityRepository<Project>(dbContext);
-            this.projectPicturesRepository = new EfDeletableEntityRepository<ProjectPicture>(dbContext);
+            this.dbContext = new ApplicationDbContext(options.Options);
+            this.projectsRepository = new EfDeletableEntityRepository<Project>(this.dbContext);
+            this.projectPicturesRepository = new EfDeletableEntityRepository<ProjectPicture>(this.dbContext);
             this.service = new ProjectsService(this.projectsRepository, this.projectPicturesRepository);
         }
 
