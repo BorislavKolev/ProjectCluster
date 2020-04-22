@@ -3,12 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
+        private readonly IConfiguration configuration;
+
+        public ApplicationDbContextSeeder(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
@@ -25,8 +32,7 @@
 
             var seeders = new List<ISeeder>
                           {
-                              new RolesSeeder(),
-                              new SettingsSeeder(),
+                              new RolesSeeder(this.configuration),
                               new CategoriesSeeder(),
                           };
 

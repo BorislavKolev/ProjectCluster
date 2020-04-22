@@ -35,7 +35,15 @@
 
             var viewModel = this.profilesService.GetById<ProfileViewModel>(userId);
             viewModel.UserAverageRating = this.ratingsService.GetUserAverageRating(userId);
-            viewModel.AvatarUrl = viewModel.AvatarUrl.Insert(54, "c_fill,h_250,w_250/");
+            if (viewModel.AvatarUrl.StartsWith("https"))
+            {
+                viewModel.AvatarUrl = viewModel.AvatarUrl.Insert(55, "c_fill,h_250,w_250/");
+            }
+            else
+            {
+                viewModel.AvatarUrl = viewModel.AvatarUrl.Insert(54, "c_fill,h_250,w_250/");
+            }
+
             foreach (var project in viewModel.Projects)
             {
                 project.Rating = this.ratingsService.GetRating(project.Id);
