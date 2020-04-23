@@ -11,6 +11,7 @@
  - Implemented Cloudinary for file storage
  - Implemented Fontawesome icons
  - Implemented TinyMCE for project descriptions
+ - Implemented recursive comment system
  - Using AJAX and API for rating system
  - 97% unit test code coverage on services
  - Implemented seeder for populating the database with 10 000 entities
