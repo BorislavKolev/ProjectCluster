@@ -7,7 +7,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using ProjectCluster.Common;
     using ProjectCluster.Data.Models;
 
     internal class RolesSeeder : ISeeder

@@ -34,6 +34,7 @@
                           {
                               new RolesSeeder(this.configuration),
                               new CategoriesSeeder(),
+                              new ProjectsSeeder(),
                           };
 
             foreach (var seeder in seeders)
