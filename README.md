@@ -3,7 +3,7 @@
  Another goal of the website is to get you ispired. You can look at other peoples' projects and ideas. If you want you can comment and rate others projects - from 1 to 5 stars. You can also check other peoples' profiles and see what is thier average rating, list of projects and more information in general.
  There is also an administration area.
  
- Link for ProjectCluster: https://www.projectcluster.azurewebsites.net
+ Link for ProjectCluster: projectcluster.azurewebsites.net
  
 #### Main technical characteristics (in order of implementation):
  - Using the ASP.NET Core template from @NikolayIT
