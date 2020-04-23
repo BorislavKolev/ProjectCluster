@@ -100,7 +100,7 @@
                                             {
                                                 <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
                                             }
-                                            <li class="first"><i class="fas fa-star"></i><span>@project.Rating</span></li>
+                                            <li class="first"><i class="fas fa-star"></i><span>@project.Rating.ToString("F2", CultureInfo.InvariantCulture)</span></li>
                                         </ul>
                                         <div class="clear"></div>
                                     </div>

@@ -35,6 +35,9 @@
                               new RolesSeeder(this.configuration),
                               new CategoriesSeeder(),
                               new ProjectsSeeder(),
+                              new ProjectPicturesSeeder(),
+                              new CommentsSeeder(),
+                              new RatingsSeeder(),
                           };
 
             foreach (var seeder in seeders)

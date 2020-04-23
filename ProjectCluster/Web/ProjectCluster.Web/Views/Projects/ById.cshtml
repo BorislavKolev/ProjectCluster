@@ -1,4 +1,5 @@
 ﻿@model ProjectCluster.Web.ViewModels.Projects.ProjectViewModel
+@using System.Globalization;
 @{
     this.ViewData["Title"] = Model.Title;
     void DisplayComments(int? parentId)
@@ -29,8 +30,8 @@
                         {
                             <a class="btn btn-color btn-rounded" onclick="showAddCommentForm(@comment.Id)">Reply</a>
                         }
-                            @{ DisplayComments(comment.Id); }
-                        </div>
+                        @{ DisplayComments(comment.Id); }
+                    </div>
                 </li>
             }
         }
@@ -184,7 +185,7 @@
                                 <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@Model.UserUsername">@Model.UserUsername</a></span></li>
                                 <li class="first"><i class="fas fa-calendar-alt"></i><span><time datetime="@Model.CreatedOn.ToString("O")"></time></span></li>
                                 <li><i class="fas fa-comments"></i><span>@Model.CommentsCount comments</span></li>
-                                <li class="first"><i class="fas fa-star"></i><span>@Model.Rating</span></li>
+                                <li class="first"><i class="fas fa-star"></i><span>@Model.Rating.ToString("F2", CultureInfo.InvariantCulture)</span></li>
                                 @if (Model.ProjectStatus.ToString() == "InProgress")
                                 {
                                     <li class="first"><i class="fas fa-tasks"></i><span>@Model.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
@@ -234,7 +235,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div id="starRatingsSum_@Model.Id">(@Model.Rating)</div>
+                        <div id="starRatingsSum_@Model.Id">(@Model.Rating.ToString("F2", CultureInfo.InvariantCulture))</div>
                     </div>
                 </article>
                 <!-- COMMENTS -->

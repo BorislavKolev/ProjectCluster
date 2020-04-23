@@ -88,12 +88,18 @@
                                             <li class="dropdown">
                                                 <a asp-area="" asp-controller="Home" asp-action="Index">Categories</a>
                                                 <ul class="dropdown-menu">
-                                                    @*To do: Add dropdown categories links*@
-                                                    <li><a href="scaffolding.html">Art</a></li>
-                                                    <li><a href="base-css.html">Programming</a></li>
-                                                    <li><a href="components.html">Gardening</a></li>
-                                                    <li><a href="icons.html">Music</a></li>
-                                                    <li><a href="list.html">Gaming</a></li>
+                                                    <li><a href="/Categories/Animals">Animals</a></li>
+                                                    <li><a href="/Categories/Art">Art</a></li>
+                                                    <li><a href="/Categories/Cars">Cars</a></li>
+                                                    <li><a href="/Categories/DIY">DIY</a></li>
+                                                    <li><a href="/Categories/Food">Food</a></li>
+                                                    <li><a href="/Categories/Gaming">Gaming</a></li>
+                                                    <li><a href="/Categories/Gardening">Gardening</a></li>
+                                                    <li><a href="/Categories/Music">Music</a></li>
+                                                    <li><a href="/Categories/Photography">Photography</a></li>
+                                                    <li><a href="/Categories/Programming">Programming</a></li>
+                                                    <li><a href="/Categories/Videography">Videography</a></li>
+                                                    <li><a href="/Categories/Writing">Writing</a></li>
                                                 </ul>
                                             </li>
                                             @if (!this.User.Identity.IsAuthenticated)

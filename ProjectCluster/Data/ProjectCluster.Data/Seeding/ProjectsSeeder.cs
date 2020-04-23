@@ -41,7 +41,7 @@
                         projectPictures.Add("https://res.cloudinary.com/sharwinchester/image/upload/c_fill,h_600,w_1200/v1587600189/beige-and-black-coated-dog-3367616_dlq7ek.jpg");
                         int rtitle = random.Next(projectTitles.Count);
                         int rpicture = random.Next(projectPictures.Count);
-                        int rprogress = random.Next(100);
+                        int rprogress = random.Next(1, 101);
                         var project = new Project
                         {
                             UserId = user.Id,
