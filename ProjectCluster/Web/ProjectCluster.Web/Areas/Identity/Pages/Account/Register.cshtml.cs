@@ -94,7 +94,7 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var avatarUrl = "https://res.cloudinary.com/sharwinchester/image/upload/v1587146749/Categories/avatar_jspqvd.png";
+                var avatarUrl = "https://res.cloudinary.com/sharwinchester/image/upload/v1587592729/Administrative/avatar_pnsyjm.png";
 
                 if (this.File != null)
                 {

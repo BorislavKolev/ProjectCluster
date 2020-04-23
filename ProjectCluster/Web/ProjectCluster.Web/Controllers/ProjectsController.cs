@@ -34,10 +34,13 @@
             {
                 return this.NotFound();
             }
-
+            foreach (var item in projectViewModel.Comments)
+            {
+                item.UserAvatarUrl = item.UserAvatarUrl.Insert(55, "c_fill,h_100,w_100/");
+            }
+            projectViewModel.UserAvatarUrl = projectViewModel.UserAvatarUrl.Insert(55, "c_fill,h_250,w_250/");
             var sidebarCategories = this.categoriesService.GetAll<SidebarCategoryViewModel>();
             var urls = this.projectsService.GetPictureUrls(projectViewModel.Id);
-
             projectViewModel.SidebarCategories = sidebarCategories;
             projectViewModel.Urls = urls;
 

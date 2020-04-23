@@ -31,6 +31,8 @@
 
         public string UserUsername { get; set; }
 
+        public string UserAvatarUrl { get; set; }
+
         public int CommentsCount { get; set; }
 
         public IEnumerable<ProjectCommentViewModel> Comments { get; set; }

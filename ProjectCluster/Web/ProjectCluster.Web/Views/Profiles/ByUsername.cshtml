@@ -4,13 +4,6 @@
     ViewData["Title"] = "Profile";
 }
 <section id="subintro">
-    <div class="container">
-        <div class="row">
-            <div class="span4">
-                <h3><strong>User Profile</strong></h3>
-            </div>
-        </div>
-    </div>
 </section>
 <section id="maincontent">
     <div class="container">
@@ -85,20 +78,20 @@
                                 }
                                 <div class="row">
                                     <div class="span3">
-                                        <div class="post-icon">
-                                            <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
-                                        </div>
+                                        <a class="pull-left" href="/Profile/@project.UserUsername">
+                                            <img class="img-circle-post" src="" alt="" />
+                                        </a>
                                         <ul class="post-meta">
                                             <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@project.UserUsername">@project.UserUsername</a></span></li>
                                             <li class="first"><i class="fas fa-calendar-alt"></i><span>@project.CreatedOn.ToShortDateString()</span></li>
                                             <li><i class="fas fa-comments"></i><span>@project.CommentsCount comments</span></li>
                                             @if (project.ProjectStatus.ToString() == "InProgress")
                                             {
-                                                <li class="first"><i class="fas fa-tasks"></i><span>@project.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+                                            <li class="first"><i class="fas fa-tasks"></i><span>@project.Progress% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
                                             }
                                             else
                                             {
-                                                <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
+                                            <li class="first"><i class="fas fa-tasks"></i><span>@project.ProjectStatus</span></li>
                                             }
                                             <li class="first"><i class="fas fa-star"></i><span>@project.Rating.ToString("F2", CultureInfo.InvariantCulture)</span></li>
                                         </ul>

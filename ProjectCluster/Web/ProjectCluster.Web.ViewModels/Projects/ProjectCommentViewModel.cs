@@ -16,5 +16,7 @@
         public string Content { get; set; }
 
         public string UserUserName { get; set; }
+
+        public string UserAvatarUrl { get; set; }
     }
 }

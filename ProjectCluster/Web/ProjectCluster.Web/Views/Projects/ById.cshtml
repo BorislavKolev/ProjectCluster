@@ -14,9 +14,8 @@
             @foreach (var comment in comments)
             {
                 <li class="media">
-                    @*To do: Add user avatar*@
-                    <a class="pull-left" href="#">
-                        <img class="img-circle" src="/img/small-avatar.png" alt="" />
+                    <a class="pull-left" href="/Profile/@comment.UserUserName">
+                        <img class="img-circle-post" src="@comment.UserAvatarUrl" alt="" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading"><a href="/Profile/@comment.UserUserName">@comment.UserUserName</a></h5>
@@ -40,9 +39,8 @@
             @foreach (var comment in comments)
             {
                 <div class="media">
-                    @*To do: Add user avatar*@
-                    <a class="pull-left" href="#">
-                        <img class="img-circle" src="/img/small-avatar.png" alt="" />
+                    <a class="pull-left" href="/Profile/@comment.UserUserName">
+                        <img class="img-circle-post" src="@comment.UserAvatarUrl" alt="" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading"><a href="/Profile/@comment.UserUserName">@comment.UserUserName</a></h5>
@@ -65,19 +63,6 @@
 }
 
 <section id="subintro">
-    <div class="container">
-        <div class="row">
-            <div class="span4">
-                <h3>Post <strong>left sidebar</strong></h3>
-            </div>
-            <div class="span8">
-                <ul class="breadcrumb notop">
-                    <li><a href="#">Home</a><span class="divider">/</span></li>
-                    <li class="active">Post left sidebar</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section id="maincontent">
@@ -86,7 +71,7 @@
             <div class="span4">
                 <aside>
                     <div class="widget">
-                        <h4>Search</h4>
+                        <h4>Search *To be implemented*</h4>
                         <form class="form-search">
                             <input placeholder="Type something" type="text" class="input-medium search-query">
                             <button type="submit" class="btn btn-flat btn-color">Search</button>
@@ -102,7 +87,7 @@
                         </ul>
                     </div>
                     <div class="widget">
-                        <h4>Recent projects</h4>
+                        <h4>Recent projects *To be implemented*</h4>
                         <ul class="recent-posts">
                             <li>
                                 <a href="#"><img src="~/img/dummies/post-50.jpg" alt="" /> Lorem ipsum dolor sit amet munere commodo ut nam</a>
@@ -133,17 +118,7 @@
                                 <span class="comment"><i class="icon-comment"></i> 3 Comments</span>
                             </li>
                         </ul>
-                    </div>
-                    <div class="widget">
-                        <h4>Tags</h4>
-                        <ul class="tags">
-                            <li><a href="#">Tutorial</a></li>
-                            <li><a href="#">Tricks</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Trends</a></li>
-                            <li><a href="#">Online</a></li>
-                        </ul>
-                    </div>
+                    </div>                   
                 </aside>
             </div>
             <div class="span8">
@@ -178,8 +153,8 @@
                     }
                     <div class="row">
                         <div class="span2">
-                            <a class="pull-left" href="#">
-                                <img class="img-circle-post" src="~/img/avatar.png" alt="" />
+                            <a class="pull-left" href="/Profile/@Model.UserUsername">
+                                <img class="img-circle-post" src="@Model.UserAvatarUrl" alt="" />
                             </a>
                             <ul class="post-meta">
                                 <li class="first"><i class="fas fa-user"></i><span><a href="/Profile/@Model.UserUsername">@Model.UserUsername</a></span></li>
