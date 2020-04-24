@@ -68,12 +68,6 @@
             Cloudinary cloudinary = new Cloudinary(account);
 
             services.AddSingleton(cloudinary);
-            //services.AddAuthentication()
-            // .AddCookie(options =>
-            // {
-            //     options.LoginPath = "/Identity/Account/Login";
-            //     options.LogoutPath = "/Identity/Account/Logout";
-            // });
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
